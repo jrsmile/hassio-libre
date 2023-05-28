@@ -1,0 +1,10 @@
+{
+  "domain": "hassio-libre",
+  "name": "Libre",
+  "codeowners": [],
+  "dependencies": [],
+  "documentation": "https://github.com/jrsmile/hassio-libre/tree/master/custom_components/libre/",
+  "iot_class": "cloud_polling",
+  "requirements": [],
+  "version": "0.1.0"
+}
