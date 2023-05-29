@@ -4,6 +4,7 @@
   "codeowners": ["@jrsmile"],
   "dependencies": [],
   "documentation": "https://github.com/jrsmile/hassio-libre/tree/master/README.md",
+  "issue_tracker": "https://github.com/jrsmile/hassio-libre/issues",
   "iot_class": "cloud_polling",
   "requirements": [],
   "version": "0.1.0"
