@@ -10,7 +10,7 @@ from .entity import IntegrationLibreEntity
 ENTITY_DESCRIPTIONS = (
     SwitchEntityDescription(
         key="integration_Libre",
-        name="Integration Switch",
+        name="Libre deactivate polling",
         icon="mdi:format-quote-close",
     ),
 )

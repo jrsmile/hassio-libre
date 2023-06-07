@@ -14,7 +14,7 @@ from .entity import IntegrationLibreEntity
 ENTITY_DESCRIPTIONS = (
     BinarySensorEntityDescription(
         key="integration_Libre",
-        name="Integration Libre Binary Sensor",
+        name="Libre working",
         device_class=BinarySensorDeviceClass.CONNECTIVITY,
     ),
 )

@@ -1,38 +1,46 @@
-"""Platform for sensor integration."""
+"""Sensor platform for integration_Libre."""
 from __future__ import annotations
 
-from homeassistant.components.sensor import (
-    SensorDeviceClass,
-    SensorEntity,
-    SensorStateClass,
+from homeassistant.components.sensor import SensorEntity, SensorEntityDescription
+
+from .const import DOMAIN
+from .coordinator import LibreDataUpdateCoordinator
+from .entity import IntegrationLibreEntity
+
+ENTITY_DESCRIPTIONS = (
+    SensorEntityDescription(
+        key="integration_Libre",
+        name="Libre Bloodsugar",
+        icon="mdi:format-quote-close",
+    ),
 )
-from homeassistant.const import TEMP_CELSIUS
-from homeassistant.core import HomeAssistant
-from homeassistant.helpers.entity_platform import AddEntitiesCallback
-from homeassistant.helpers.typing import ConfigType, DiscoveryInfoType
 
 
-def setup_platform(
-    hass: HomeAssistant,
-    config: ConfigType,
-    add_entities: AddEntitiesCallback,
-    discovery_info: DiscoveryInfoType | None = None
-) -> None:
+async def async_setup_entry(hass, entry, async_add_devices):
     """Set up the sensor platform."""
-    add_entities([ExampleSensor()])
+    coordinator = hass.data[DOMAIN][entry.entry_id]
+    async_add_devices(
+        IntegrationLibreSensor(
+            coordinator=coordinator,
+            entity_description=entity_description,
+        )
+        for entity_description in ENTITY_DESCRIPTIONS
+    )
 
 
-class ExampleSensor(SensorEntity):
-    """Representation of a Sensor."""
+class IntegrationLibreSensor(IntegrationLibreEntity, SensorEntity):
+    """integration_Libre Sensor class."""
 
-    _attr_name = "Example Temperature"
-    _attr_native_unit_of_measurement = TEMP_CELSIUS
-    _attr_device_class = SensorDeviceClass.TEMPERATURE
-    _attr_state_class = SensorStateClass.MEASUREMENT
+    def __init__(
+        self,
+        coordinator: LibreDataUpdateCoordinator,
+        entity_description: SensorEntityDescription,
+    ) -> None:
+        """Initialize the sensor class."""
+        super().__init__(coordinator)
+        self.entity_description = entity_description
 
-    def update(self) -> None:
-        """Fetch new state data for the sensor.
-
-        This is the only method that should fetch new data for Home Assistant.
-        """
-        self._attr_native_value = 23
+    @property
+    def native_value(self) -> str:
+        """Return the native value of the sensor."""
+        return self.coordinator.data.get("body")
