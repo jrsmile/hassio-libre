@@ -4,3 +4,8 @@ from logging import Logger, getLogger
 # name for the integration.
 DOMAIN = "libre"
 LOGGER: Logger = getLogger(__package__)
+
+NAME = "Libre"
+DOMAIN = "libre"
+VERSION = "0.1.0"
+ATTRIBUTION = "Data provided by https://librelinkup.com/"
