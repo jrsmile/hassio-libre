@@ -1,7 +1,7 @@
 """Custom integration to integrate Libre with Home Assistant.
 
 For more details about this integration, please refer to
-https://github.com/jrsmile/ibre
+https://github.com/jrsmile/libre
 """
 from __future__ import annotations
 
